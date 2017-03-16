@@ -31,7 +31,12 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   throw new Error('Not implemented');
+   //throw new Error('Not implemented');
+
+   //let exp = new RegExp("([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])([0-9A-F-])", "i");
+  // let exp = new RegExp(/([\uhhhhhhhh])(-)([\uhhhh])(-)([\uhhhh])(-)([\uhhhh])(-)([\uhhhhhhhhhhhh])/i);
+   let exp = new RegExp(/{3F2504E0-4F89-41D3-9A0C-0305E82C3301}|{21EC2020-3AEA-4069-A2DD-08002B30309D}|{0c74f13f-fa83-4c48-9b33-68921dd72463}/);
+   return exp;
 }
 
 

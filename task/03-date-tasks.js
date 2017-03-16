@@ -22,7 +22,8 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   let date = new Date(value);
+   return date;
 }
 
 /**
@@ -37,7 +38,8 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   let date = new Date(value);
+   return date;
 }
 
 
@@ -56,7 +58,12 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   let year = new Date(date).getFullYear();
+   if((year%4 == 0 && year%100 != 0) || (year%400 == 0)){
+     return true;
+   }else{
+    return false;
+   }
 }
 
 
@@ -76,7 +83,86 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   
+   let milSecStart = new Date(startDate).getMilliseconds();
+   let milSecEnd = new Date(endDate).getMilliseconds();
+   let rezMillSec = 0;
+   if(milSecStart > milSecEnd){
+      rezMillSec = milSecEnd - milSecStart - 999;
+   }else {
+     rezMillSec = milSecEnd - milSecStart;
+     if(rezMillSec == 0){
+       rezMillSec = '000';
+     }else{
+        for(let i=1; i<10; i++){
+          if(rezH == i){
+            rezH = '00'+rezH;
+          }
+        }
+        for(let i=10; i<99; i++){
+          if(rezH == i){
+            rezH = '0'+rezH;
+          }
+        }
+        rezMillSec = ''+rezMillSec;
+     }
+   }
+   let SecStart = new Date(startDate).getSeconds();
+   let SecEnd = new Date(endDate).getSeconds();     
+   let rezSec = 0;
+   if(SecStart > SecEnd){
+      rezSec = SecEnd - SecStart - 60;
+   }else {
+     rezSec = SecEnd - SecStart;
+     if(rezSec == 0){
+       rezSec = '00';
+     }else{
+        for(let i=1; i<10; i++){
+          if(rezH == i){
+            rezH = '0'+rezH;
+          }
+        }
+        rezSec = ''+rezSec;
+     }
+   }
+   let MinStart = new Date(startDate).getMinutes();
+   let MinEnd = new Date(endDate).getMinutes();     
+   let rezMin = 0;
+   if(MinStart > MinEnd){
+      rezMin = MinEnd - MinStart - 60;
+   }else {
+     rezMin = MinEnd - MinStart;
+     if(rezMin == 0){
+       rezMin = '00';
+     }else{
+        for(let i=1; i<10; i++){
+          if(rezH == i){
+            rezH = '0'+rezH;
+          }
+        }
+        rezMin = ''+rezMin;
+     }
+   }
+   let HStart = new Date(startDate).getHours();
+   let HEnd = new Date(endDate).getHours();     
+   var rezH = 0;
+   if(HStart > HEnd){
+      rezH = HEnd - HStart - 24;
+   }else {
+     rezH = HEnd - HStart;
+     if(rezH == 0){
+       rezH = '00';
+     }else{
+        for(let i=1; i<10; i++){
+          if(rezH == i){
+            rezH = '0'+rezH;
+          }
+        }
+        rezH = ''+rezH;
+     }
+   }
+   var str = rezH+':'+rezMin+':'+rezSec+'.'+rezMillSec;
+   return str.toString();
 }
 
 
@@ -94,7 +180,43 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+
+    var hour = new Date(date).getHours();
+    var min = new Date(date).getMinutes();
+    var count = 0;
+    var argHours = [];
+
+    if(hour == 0){
+      hour = 21;
+    }else if(hour == 1){
+      hour = 22;
+    }else if(hour == 2){
+      hour = 23;
+    }else {
+      hour = hour-3;
+    }
+
+    for(var i=13; i<=24; i++){
+      argHours[count] = i;
+      count += 1;
+    }
+    for(var i=0; i<argHours.length; i++){
+      if(hour == argHours[i]){
+        hour = i+1;
+      }
+    }
+
+    var angel = 0.5*(60*hour-11*min);
+    if(angel < 0){
+      angel = angel-2*angel;
+    }
+    if(angel <= 180){
+      return Math.PI*(angel/180);
+    }
+    if(angel > 180){
+      angel = 360 - angel;
+      return Math.PI*(angel/180);
+    }
 }
 
 

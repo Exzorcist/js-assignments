@@ -17,8 +17,42 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
+    //throw new Error('Not implemented');
+    //var sides = ['N','E','S','W'];  // use array of cardinal directions only!
+    let sides = [{ abbreviation : 'N',     azimuth : 0.00 },
+                 { abbreviation : 'NbE',   azimuth : 11.25 },
+                 { abbreviation : 'NNE',   azimuth : 22.50 },
+                 { abbreviation : 'NEbN',   azimuth : 33.75 },
+                 { abbreviation : 'NE',   azimuth : 45.00 },
+                 { abbreviation : 'NEbE',   azimuth : 56.25 },
+                 { abbreviation : 'ENE',   azimuth : 67.50 },
+                 { abbreviation : 'EbN',   azimuth : 78.75 },
+                 { abbreviation : 'E',   azimuth : 90.00 },
+                 { abbreviation : 'EbS',   azimuth : 101.25 },
+                 { abbreviation : 'ESE',   azimuth : 112.50 },
+                 { abbreviation : 'SEbE',   azimuth : 123.75 },
+                 { abbreviation : 'SE',   azimuth : 135.00 },
+                 { abbreviation : 'SEbS',   azimuth : 146.25 },
+                 { abbreviation : 'SSE',   azimuth : 157.50 },
+                 { abbreviation : 'SbE',   azimuth : 168.75 },
+                 { abbreviation : 'S',   azimuth : 180.00 },
+                 { abbreviation : 'SbW',   azimuth : 191.25 },
+                 { abbreviation : 'SSW',   azimuth : 202.50 },
+                 { abbreviation : 'SWbS',   azimuth : 213.75 },
+                 { abbreviation : 'SW',   azimuth : 225.00 },
+                 { abbreviation : 'SWbW',   azimuth : 236.25 },
+                 { abbreviation : 'WSW',   azimuth : 247.50 },
+                 { abbreviation : 'WbS',   azimuth : 258.75 },
+                 { abbreviation : 'W',   azimuth : 270.00 },
+                 { abbreviation : 'WbN',   azimuth : 281.25 },
+                 { abbreviation : 'WNW',   azimuth : 292.50 },
+                 { abbreviation : 'NWbW',   azimuth : 303.75 },
+                 { abbreviation : 'NW',   azimuth : 315.00 },
+                 { abbreviation : 'NWbN',   azimuth : 326.25 },
+                 { abbreviation : 'NNW',   azimuth : 337.50 },
+                 { abbreviation : 'NbW',   azimuth : 348.75 }]
+
+    return sides; 
 }
 
 
@@ -88,7 +122,38 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
-    throw new Error('Not implemented');
+    let rez = [];
+    for (let i = 0; i < n; i++){
+        rez[i] = [];
+    }
+ 
+    let i = 1;
+    let j = 1;
+    for(var e = 0; e < n*n; e++){
+        rez[i-1][j-1] = e;
+        if((i + j) % 2 == 0){
+            
+            if(j < n){
+                j += 1;
+            }else{
+                i += 2;
+            }
+
+            if(i > 1){
+                i -= 1;
+            } 
+        }else {
+            if(i < n){
+                i += 1;  
+            }else{
+                j += 2;
+            }       
+            if(j > 1){
+               j -=1; 
+            } 
+        }
+    }
+    return rez;
 }
 
 
@@ -114,6 +179,13 @@ function getZigZagMatrix(n) {
  */
 function canDominoesMakeRow(dominoes) {
     throw new Error('Not implemented');
+/*    console.log(dominoes);
+    let rez = [];
+    for(let i=0; i < dominoes.length; i++){
+        for(let j=0; j < 2; j++){
+            if(dominoes[i][j] == )
+        }
+    }*/
 }
 
 
@@ -138,6 +210,22 @@ function canDominoesMakeRow(dominoes) {
  */
 function extractRanges(nums) {
     throw new Error('Not implemented');
+    //let str = '';
+   //let count = 0;
+   /* for(let i=0; i < nums.length; i++){
+       /* if(nums[i]+1 == nums[i+1]){
+            count += 1;
+        }*/
+      /*  if(nums[i]+1 == nums[i+1] && nums[i+1]+1 == nums[i+2]){
+            count += 1;
+        }
+    }
+    console.log(count);
+    if(count+2 == nums.length){
+        return `${nums[0]}-${nums[count]}`;
+    }*/
+
+        
 }
 
 module.exports = {

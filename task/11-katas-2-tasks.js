@@ -34,7 +34,74 @@
  *
  */
 function parseBankAccount(bankAccount) {
-    throw new Error('Not implemented');
+    let strJSON = JSON.stringify(bankAccount);
+    let masStr = strJSON.split('n');
+
+    let up = masStr[0].split('');
+    up.pop();
+    up.shift();
+    up.push('');
+
+    let fullUp = [];
+    for(let i=0; i < up.length; i += 3){
+        fullUp.push(up[i]+up[i+1]+up[i+2]);
+    }
+    fullUp.pop();
+
+
+    let middle = masStr[1].split('');
+    middle.pop();
+    let fullMiddle = [];
+    for(let i=0; i < middle.length; i += 3){
+        fullMiddle.push(middle[i]+middle[i+1]+middle[i+2]);
+    }
+
+
+    let down = masStr[2].split('');
+    down.pop();
+    let fullDown = [];
+    for(let i=0; i < down.length; i += 3){
+        fullDown.push(down[i]+down[i+1]+down[i+2]);
+    }
+
+
+    let rezSTR = '';
+
+    for(let i=0; i < down.length; i++){
+        if(fullUp[i] == ' _ ' && fullMiddle[i] == '| |' && fullDown[i] == '|_|'){
+            rezSTR += '0';
+        }
+        if(fullUp[i] == '   ' && fullMiddle[i] == '  |' && fullDown[i] == '  |'){
+            rezSTR += '1';
+        }
+        
+        if(fullUp[i] == ' _ ' && fullMiddle[i] == ' _|' && fullDown[i] == '|_ '){
+            rezSTR += '2';
+        }
+        if(fullUp[i] == ' _ ' && fullMiddle[i] == ' _|' && fullDown[i] == ' _|'){
+            rezSTR += '3';
+        }
+        if(fullUp[i] == '   ' && fullMiddle[i] == '|_|' && fullDown[i] == '  |'){
+            rezSTR += '4';
+        }
+        if(fullUp[i] == ' _ ' && fullMiddle[i] == '|_ ' && fullDown[i] == ' _|'){
+            rezSTR += '5';
+        }
+        if(fullUp[i] == ' _ ' && fullMiddle[i] == '|_ ' && fullDown[i] == '|_|'){
+            rezSTR += '6';
+        }
+        if(fullUp[i] == ' _ ' && fullMiddle[i] == '  |' && fullDown[i] == '  |'){
+            rezSTR += '7';
+        }
+        if(fullUp[i] == ' _ ' && fullMiddle[i] == '|_|' && fullDown[i] == '|_|'){
+            rezSTR += '8';
+        }
+        if(fullUp[i] == ' _ ' && fullMiddle[i] == '|_|' && fullDown[i] == ' _|'){
+            rezSTR += '9';
+        }
+        
+    }
+    return Number(rezSTR);
 }
 
 
